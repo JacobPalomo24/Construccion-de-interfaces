@@ -207,6 +207,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Credits";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Credits";
             this.Load += new System.EventHandler(this.Credits_Load);
             this.menuBar.ResumeLayout(false);
