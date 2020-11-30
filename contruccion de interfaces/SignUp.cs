@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace contruccion_de_interfaces
@@ -7,6 +8,11 @@ namespace contruccion_de_interfaces
     public partial class SignUp : Form
     {
         private Dropshadow shadow;
+        private string path = @"C:\Users\jocel\source\repos\Construccion-de-interfaces\contruccion de interfaces\Data\users.txt";
+        private bool passOk = false;
+
+        private int id = 0;
+
         public SignUp()
         {
             InitializeComponent();
@@ -36,6 +42,26 @@ namespace contruccion_de_interfaces
             }
 
             this.ActiveControl = btn_sign_up;
+
+            if (File.Exists(path))
+            {
+                StreamReader reader = File.OpenText(path);
+                string contenido = reader.ReadToEnd();
+                reader.Close();
+
+                string[] users = contenido.Split('\n');
+
+                for (int i = 0; i < users.Length-3; i += 5)
+                {
+                    id = int.Parse(users[i].Trim().Substring(10));
+                }
+
+                id++;
+            }
+            else
+            {
+                id++;
+            }
         }
 
         int ex, ey;
@@ -108,7 +134,84 @@ namespace contruccion_de_interfaces
 
         private void btn_sign_up_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            string username = input_username.Text, pass = input_pass.Text, confirm_pass = input_confirm_pass.Text, status = "1";
+
+            if (username != "" && pass != "" && confirm_pass != "")
+            {
+                if (pass == confirm_pass)
+                {
+                    string[] user = { "ID:       " + id.ToString(), 
+                                      "USERNAME: " + username, 
+                                      "PASSWORD: " + pass, 
+                                      "STATUS:   " + status,
+                                      "--------------------------------------------"};
+
+                    if (File.Exists(path))
+                    {
+                        StreamReader reader = File.OpenText(path);
+                        string contenido = reader.ReadToEnd();
+                        reader.Close();
+
+                        string[] users = contenido.Split('\n');
+
+                        for (int i = 0; i < user.Length; i++)
+                        {
+                            if (i != user.Length - 1)
+                            {
+                                MessageBox.Show(i.ToString());
+                                contenido += user[i] + "\n";
+                            }
+                            else
+                            {
+                                MessageBox.Show(i.ToString());
+                                contenido += user[i];
+                            }
+                        }
+
+                        users = contenido.Split('\n');
+
+                        StreamWriter writer = new StreamWriter(path);
+                        for (int i = 0; i < users.Length; i++)
+                        {
+                            if (i == user.Length - 1)
+                            {
+                                writer.Write(user[i]);
+                            }
+                            else
+                            {
+                                writer.Write(user[i] + "\n");
+                            }
+                        }
+                        writer.Close();
+                    }
+                    else
+                    {
+                        StreamWriter writer = new StreamWriter(path);
+                        for (int i = 0; i < user.Length; i++)
+                        {
+                            if (i == user.Length - 1)
+                            {
+                                writer.Write(user[i]);
+                            }
+                            else
+                            {
+                                writer.Write(user[i] + "\n");
+                            }
+                        }
+                        writer.Close();
+                    }
+
+                    this.Dispose();
+                }
+                else
+                {
+                    passOk = false;
+                    input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                    input_confirm_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                    lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                    lbl_confirm_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                }
+            }
         }
 
         private void btn_sign_up_MouseEnter(object sender, System.EventArgs e)
@@ -145,6 +248,18 @@ namespace contruccion_de_interfaces
             }
         }
 
+        private void input_pass_GotFocus(object sender, System.EventArgs e)
+        {
+            if (!passOk)
+            {
+                passOk = true;
+                input_pass.ForeColor = Color.White;
+                input_confirm_pass.ForeColor = Color.White;
+                lbl_pass.ForeColor = Color.White;
+                lbl_confirm_pass.ForeColor = Color.White;
+            }
+        }
+
         private void input_confirm_pass_TextChange(object sender, System.EventArgs e)
         {
             if (input_username.Text != "" && input_pass.Text != "" && input_confirm_pass.Text != "")
@@ -156,6 +271,19 @@ namespace contruccion_de_interfaces
                 btn_sign_up.Enabled = false;
             }
         }
+
+        private void input_confirm_pass_GotFocus(object sender, System.EventArgs e)
+        {
+            if (!passOk)
+            {
+                passOk = true;
+                input_pass.ForeColor = Color.White;
+                input_confirm_pass.ForeColor = Color.White;
+                lbl_pass.ForeColor = Color.White;
+                lbl_confirm_pass.ForeColor = Color.White;
+            }
+        }
+
         private void btn_sign_up_EnabledChange(object sender, System.EventArgs e)
         {
             if (!btn_sign_up.Enabled)

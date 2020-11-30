@@ -228,7 +228,6 @@
             this.input_id.Name = "input_id";
             this.input_id.Size = new System.Drawing.Size(225, 27);
             this.input_id.TabIndex = 10;
-            this.input_id.TextChanged += new System.EventHandler(this.input_id_TextChange);
             // 
             // input_date
             // 
@@ -240,7 +239,6 @@
             this.input_date.PlaceholderText = "dd/mm/aaaa";
             this.input_date.Size = new System.Drawing.Size(225, 27);
             this.input_date.TabIndex = 11;
-            this.input_date.TextChanged += new System.EventHandler(this.input_date_TextChange);
             // 
             // input_precipitation
             // 
@@ -304,7 +302,6 @@
             // btn_search_file
             // 
             this.btn_search_file.BackColor = System.Drawing.Color.Transparent;
-            this.btn_search_file.Enabled = false;
             this.btn_search_file.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
             this.btn_search_file.FlatAppearance.BorderSize = 2;
             this.btn_search_file.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(145)))), ((int)(((byte)(0)))));
@@ -318,8 +315,8 @@
             this.btn_search_file.TabIndex = 17;
             this.btn_search_file.Text = "BUSCAR";
             this.btn_search_file.UseVisualStyleBackColor = false;
-            this.btn_search_file.Click += new System.EventHandler(this.btn_search_file_Click);
             this.btn_search_file.EnabledChanged += new System.EventHandler(this.btn_search_file_EnabledChanged);
+            this.btn_search_file.Click += new System.EventHandler(this.btn_search_file_Click);
             this.btn_search_file.MouseEnter += new System.EventHandler(this.btn_search_file_MouseEnter);
             this.btn_search_file.MouseLeave += new System.EventHandler(this.btn_search_file_MouseLeave);
             // 
@@ -341,6 +338,7 @@
             this.btn_save.Text = "GUARDAR";
             this.btn_save.UseVisualStyleBackColor = false;
             this.btn_save.EnabledChanged += new System.EventHandler(this.btn_save_EnabledChanged);
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             this.btn_save.MouseEnter += new System.EventHandler(this.btn_save_MouseEnter);
             this.btn_save.MouseLeave += new System.EventHandler(this.btn_save_MouseLeave);
             // 
@@ -392,6 +390,7 @@
             this.btn_delete_file.Text = "BORRAR ARCHIVO";
             this.btn_delete_file.UseVisualStyleBackColor = false;
             this.btn_delete_file.EnabledChanged += new System.EventHandler(this.btn_delete_file_EnabledChanged);
+            this.btn_delete_file.Click += new System.EventHandler(this.btn_delete_file_Click);
             this.btn_delete_file.MouseEnter += new System.EventHandler(this.btn_delete_file_MouseEnter);
             this.btn_delete_file.MouseLeave += new System.EventHandler(this.btn_delete_file_MouseLeave);
             // 

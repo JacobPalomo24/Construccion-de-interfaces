@@ -1,0 +1,31 @@
+ID:            1
+DATE:          24/11/2020
+PRECIPITACION: 25
+EVAPORACION:   15
+TEMP-MA:       36
+TEMP-MI:       9
+STATUS:        1
+---------------------------------------------
+ID:            2
+DATE:          25/11/2020
+PRECIPITACION: 3
+EVAPORACION:   4
+TEMP-MA:       3
+TEMP-MI:       9
+STATUS:        1
+---------------------------------------------
+ID:            3
+DATE:          26/11/2020 
+PRECIPITACION: 3
+EVAPORACION:   3
+TEMP-MA:       3
+TEMP-MI:       3
+STATUS:        0
+---------------------------------------------
+ID:            4
+DATE:          27/11/2020
+PRECIPITACION: 35
+EVAPORACION:   45
+TEMP-MA:       36
+TEMP-MI:       9
+STATUS:        1

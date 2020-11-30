@@ -133,6 +133,7 @@
             this.input_pass.Size = new System.Drawing.Size(225, 27);
             this.input_pass.TabIndex = 2;
             this.input_pass.TextChanged += new System.EventHandler(this.input_pass_TextChange);
+            this.input_pass.GotFocus += new System.EventHandler(this.input_pass_GotFocus);
             // 
             // input_confirm_pass
             // 
@@ -147,6 +148,7 @@
             this.input_confirm_pass.Size = new System.Drawing.Size(225, 27);
             this.input_confirm_pass.TabIndex = 3;
             this.input_confirm_pass.TextChanged += new System.EventHandler(this.input_confirm_pass_TextChange);
+            this.input_confirm_pass.GotFocus += new System.EventHandler(this.input_confirm_pass_GotFocus);
             // 
             // btn_sign_up
             // 
