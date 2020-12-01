@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace contruccion_de_interfaces
@@ -8,6 +9,7 @@ namespace contruccion_de_interfaces
     {
 
         private Dropshadow shadow;
+        private string path = @"C:\Users\jocel\source\repos\Construccion-de-interfaces\contruccion de interfaces\Data\users.txt";
 
         public Login()
         {
@@ -151,12 +153,66 @@ namespace contruccion_de_interfaces
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            string username = input_username.Text.Trim(), pass = input_password.Text.Trim();
 
-            Home home_form = new Home();
-            home_form.Location = PointToScreen(this.Location);
-            home_form.ShowDialog();
-            this.Show();
+            if (username != "" && pass != "")
+            {
+                if (userExist(username, pass))
+                {
+                    this.Hide();
+
+                    Home home_form = new Home(username);
+                    home_form.Location = PointToScreen(this.Location);
+                    home_form.ShowDialog();
+                    this.Show();
+                }
+                else
+                {
+                    Alert alert = new Alert("Usuario o contraseña incorrectos.", "Credenciales incorrectas");
+                    alert.ShowDialog();
+                }
+            }
+        }
+
+        private bool userExist(string username, string pass)
+        {
+            if (File.Exists(path))
+            {
+                bool eUser = false;
+
+                StreamReader reader = File.OpenText(path);
+                string contenido = reader.ReadToEnd();
+                reader.Close();
+
+                string[] users = contenido.Split('\n');
+
+                for (int i = 1; i < users.Length; i+=5)
+                {
+                    if (users[i].Trim().Substring(10).Equals(username))
+                    {
+                        if(users[i + 1].Trim().Substring(10).Equals(pass))
+                        {
+                            eUser = true;
+                            break;
+                        }
+                        else
+                        {
+                            eUser = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        eUser = false;
+                    }
+                }
+
+                return eUser;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 

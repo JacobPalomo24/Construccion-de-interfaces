@@ -9,7 +9,7 @@ namespace contruccion_de_interfaces
     {
         private Dropshadow shadow;
         private string path = @"C:\Users\jocel\source\repos\Construccion-de-interfaces\contruccion de interfaces\Data\users.txt";
-        private bool passOk = false;
+        private bool passOk = false, userOk = false;
 
         private int id = 0;
 
@@ -134,82 +134,217 @@ namespace contruccion_de_interfaces
 
         private void btn_sign_up_Click(object sender, EventArgs e)
         {
-            string username = input_username.Text, pass = input_pass.Text, confirm_pass = input_confirm_pass.Text, status = "1";
+            string username = input_username.Text, pass = input_pass.Text, confirm_pass = input_confirm_pass.Text, status = "1", symbolsPass = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~", uppercase = "ABCDEFGHYJKLMNÑOPQRSTUVWXYZ", lowercase = "abcdefghijklmnñopqrstuvwxyz", numbers = "0123456789";
+            bool existUsername = false, cSymbols = false, cUppercase = false, cLowercase = false, cNumbers = false;
+
+            Alert alert;
 
             if (username != "" && pass != "" && confirm_pass != "")
             {
-                if (pass == confirm_pass)
+
+                if (File.Exists(path))
                 {
-                    string[] user = { "ID:       " + id.ToString(), 
-                                      "USERNAME: " + username, 
-                                      "PASSWORD: " + pass, 
-                                      "STATUS:   " + status,
-                                      "--------------------------------------------"};
+                    StreamReader reader = File.OpenText(path);
+                    string contenido = reader.ReadToEnd();
+                    reader.Close();
 
-                    if (File.Exists(path))
+                    string[] users = contenido.Split('\n');
+
+                    for(int i = 1; i < users.Length; i+=5)
                     {
-                        StreamReader reader = File.OpenText(path);
-                        string contenido = reader.ReadToEnd();
-                        reader.Close();
-
-                        string[] users = contenido.Split('\n');
-
-                        for (int i = 0; i < user.Length; i++)
+                        if (users[i].Trim().Substring(10).Equals(username))
                         {
-                            if (i != user.Length - 1)
-                            {
-                                MessageBox.Show(i.ToString());
-                                contenido += user[i] + "\n";
-                            }
-                            else
-                            {
-                                MessageBox.Show(i.ToString());
-                                contenido += user[i];
-                            }
+                            existUsername = true;
+                            break;
                         }
-
-                        users = contenido.Split('\n');
-
-                        StreamWriter writer = new StreamWriter(path);
-                        for (int i = 0; i < users.Length; i++)
+                        else
                         {
-                            if (i == user.Length - 1)
-                            {
-                                writer.Write(user[i]);
-                            }
-                            else
-                            {
-                                writer.Write(user[i] + "\n");
-                            }
+                            existUsername = false;
                         }
-                        writer.Close();
                     }
-                    else
-                    {
-                        StreamWriter writer = new StreamWriter(path);
-                        for (int i = 0; i < user.Length; i++)
-                        {
-                            if (i == user.Length - 1)
-                            {
-                                writer.Write(user[i]);
-                            }
-                            else
-                            {
-                                writer.Write(user[i] + "\n");
-                            }
-                        }
-                        writer.Close();
-                    }
-
-                    this.Dispose();
                 }
                 else
                 {
-                    passOk = false;
-                    input_pass.ForeColor = Color.FromArgb(255, 0, 0);
-                    input_confirm_pass.ForeColor = Color.FromArgb(255, 0, 0);
-                    lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
-                    lbl_confirm_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                    existUsername = false;
+                }
+
+                if (!existUsername)
+                {
+                    if (pass.Length >= 8)
+                    {
+                        for (int i = 0; i < pass.Length; i++)
+                        {
+                            for (int o = 0; o < symbolsPass.Length; o++)
+                            {
+                                if (pass[i].ToString().Contains(symbolsPass[o]))
+                                {
+                                    cSymbols = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < pass.Length; i++)
+                        {
+                            for (int o = 0; o < uppercase.Length; o++)
+                            {
+                                if (pass[i].ToString().Contains(uppercase[o]))
+                                {
+                                    cUppercase = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < pass.Length; i++)
+                        {
+                            for (int o = 0; o < lowercase.Length; o++)
+                            {
+                                if (pass[i].ToString().Contains(lowercase[o]))
+                                {
+                                    cLowercase = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < pass.Length; i++)
+                        {
+                            for (int o = 0; o < numbers.Length; o++)
+                            {
+                                if (pass[i].ToString().Contains(numbers[o]))
+                                {
+                                    cNumbers = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (cSymbols)
+                        {
+                            if (cUppercase)
+                            {
+                                if (cLowercase)
+                                {
+                                    if (cNumbers)
+                                    {
+                                        if (pass == confirm_pass)
+                                        {
+                                            string[] user = { "ID:       " + id.ToString(),
+                                                          "USERNAME: " + username,
+                                                          "PASSWORD: " + pass,
+                                                          "STATUS:   " + status,
+                                                          "--------------------------------------------"};
+
+                                            if (File.Exists(path))
+                                            {
+                                                StreamReader reader = File.OpenText(path);
+                                                string contenido = reader.ReadToEnd();
+                                                reader.Close();
+
+                                                for (int o = 0; o < user.Length; o++)
+                                                {
+                                                    contenido += "\n" + user[o];
+                                                }
+
+                                                string[] users = contenido.Split('\n');
+
+                                                StreamWriter writer = new StreamWriter(path);
+                                                for (int i = 0; i < users.Length; i++)
+                                                {
+                                                    if (i == users.Length - 1)
+                                                    {
+                                                        writer.Write(users[i].Trim());
+                                                    }
+                                                    else
+                                                    {
+                                                        writer.Write(users[i].Trim() + "\n");
+                                                    }
+                                                }
+                                                writer.Close();
+                                            }
+                                            else
+                                            {
+                                                StreamWriter writer = new StreamWriter(path);
+                                                for (int i = 0; i < user.Length; i++)
+                                                {
+                                                    if (i == user.Length - 1)
+                                                    {
+                                                        writer.Write(user[i]);
+                                                    }
+                                                    else
+                                                    {
+                                                        writer.Write(user[i] + "\n");
+                                                    }
+                                                }
+                                                writer.Close();
+                                            }
+
+                                            this.Dispose();
+                                        }
+                                        else
+                                        {
+                                            passOk = false;
+                                            input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                            input_confirm_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                            lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                            lbl_confirm_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                            alert = new Alert("Las contraseñas deben ser iguales.", "Error en las contraseñas");
+                                            alert.ShowDialog();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        passOk = false;
+                                        input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                        lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                        alert = new Alert("La contraseña debe contener almenos 1 número.", "Contraseña no segura");
+                                        alert.ShowDialog();
+                                    }
+                                }
+                                else
+                                {
+                                    passOk = false;
+                                    input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                    lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                    alert = new Alert("La contraseña debe contener 1 letra minúscula.", "Contraseña no segura");
+                                    alert.ShowDialog();
+                                }
+                            }
+                            else
+                            {
+                                passOk = false;
+                                input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                                alert = new Alert("La contraseña debe de contener 1 letra mayúscula.", "Contraseña no segura");
+                                alert.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            passOk = false;
+                            input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                            lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                            alert = new Alert("La contraseña debe contener almenos un símbolo.", "Contraseña no segura");
+                            alert.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        passOk = false;
+                        input_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                        lbl_pass.ForeColor = Color.FromArgb(255, 0, 0);
+                        alert = new Alert("La contraseña debe tener mínimo 8 caracteres.", "Contraseña no segura");
+                        alert.ShowDialog();
+                    }
+                }
+                else
+                {
+                    userOk = false;
+                    input_username.ForeColor = Color.FromArgb(255, 0, 0);
+                    lbl_username.ForeColor = Color.FromArgb(255, 0, 0);
+                    alert = new Alert("El usuario ya existe, elige otro.", "Usuario existente");
+                    alert.ShowDialog();
                 }
             }
         }
@@ -233,6 +368,16 @@ namespace contruccion_de_interfaces
             else
             {
                 btn_sign_up.Enabled = false;
+            }
+        }
+
+        private void input_username_GotFocus(object sender, System.EventArgs e)
+        {
+            if (!userOk)
+            {
+                passOk = true;
+                input_username.ForeColor = Color.White;
+                lbl_username.ForeColor = Color.White;
             }
         }
 

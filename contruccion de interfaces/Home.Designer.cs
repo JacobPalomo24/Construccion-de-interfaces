@@ -172,9 +172,9 @@
             this.lbl_greeting.ForeColor = System.Drawing.Color.White;
             this.lbl_greeting.Location = new System.Drawing.Point(287, 191);
             this.lbl_greeting.Name = "lbl_greeting";
-            this.lbl_greeting.Size = new System.Drawing.Size(215, 36);
+            this.lbl_greeting.Size = new System.Drawing.Size(207, 36);
             this.lbl_greeting.TabIndex = 5;
-            this.lbl_greeting.Text = "¡Bienvenido Jacob!";
+            this.lbl_greeting.Text = "¡Bienvenido :user:!";
             // 
             // pictureBox1
             // 

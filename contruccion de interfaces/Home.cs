@@ -8,9 +8,12 @@ namespace contruccion_de_interfaces
     {
         private Dropshadow shadow;
 
-        public Home()
+        public Home(string user)
         {
             InitializeComponent();
+            lbl_greeting.Text = "¡Bienvenido, " + user + "!";
+            int x = (800 - lbl_greeting.Width) / 2;
+            lbl_greeting.Location = new Point(x, 191);
         }
 
         private void Home_Load(object sender, System.EventArgs e)

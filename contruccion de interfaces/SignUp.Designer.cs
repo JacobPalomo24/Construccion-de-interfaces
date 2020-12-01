@@ -119,6 +119,7 @@
             this.input_username.Size = new System.Drawing.Size(225, 27);
             this.input_username.TabIndex = 1;
             this.input_username.TextChanged += new System.EventHandler(this.input_username_TextChange);
+            this.input_username.GotFocus += new System.EventHandler(this.input_username_GotFocus);
             // 
             // input_pass
             // 
