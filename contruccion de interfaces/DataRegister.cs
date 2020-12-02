@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace contruccion_de_interfaces
@@ -7,6 +8,9 @@ namespace contruccion_de_interfaces
     public partial class DataRegister : Form
     {
         private Dropshadow shadow;
+        private string path = @"C:\Users\jocel\source\repos\Construccion-de-interfaces\contruccion de interfaces\Data\database.txt";
+        private int id = 0;
+
         public DataRegister()
         {
             InitializeComponent();
@@ -20,6 +24,8 @@ namespace contruccion_de_interfaces
 
         private void DataRegister_Load(object sender, EventArgs e)
         {
+            DateTime today = DateTime.Today;
+
             Width = 800;
             Height = 450;
             if (!DesignMode)
@@ -34,6 +40,30 @@ namespace contruccion_de_interfaces
                 };
                 shadow.RefreshShadow();
             }
+
+            input_date.Text = today.ToString("dd/MM/yyyy");
+
+            if (File.Exists(path))
+            {
+                StreamReader reader = File.OpenText(path);
+                string contenido = reader.ReadToEnd();
+                reader.Close();
+
+                string[] climas = contenido.Split('\n');
+
+                for (int i = 0; i < climas.Length; i += 8)
+                {
+                    id = int.Parse(climas[i].Trim().Substring(15));
+                }
+
+                id++;
+            }
+            else
+            {
+                id++;
+            }
+
+            input_id.Text = id.ToString();
         }
 
         int ex, ey;
@@ -113,7 +143,75 @@ namespace contruccion_de_interfaces
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+            string ID = input_id.Text.Trim(), date = input_date.Text.Trim(), precipitation = input_precipitation.Text.Trim(), evaporation = input_evaporation.Text.Trim(), max_temp = input_maximum_temperature.Text.Trim(), min_temp = input_minimum_temperature.Text.Trim();
 
+            Alert alert;
+
+            if (ID != "" && date != "" && precipitation != "" && evaporation != "" && max_temp != "" && min_temp != "")
+            {
+                string[] clima = { "ID:            " + ID,
+                                   "DATE:          " + date,
+                                   "PRECIPITACION: " + precipitation,
+                                   "EVAPORACION:   " + evaporation,
+                                   "TEMP-MA:       " + max_temp,
+                                   "TEMP-MI:       " + min_temp,
+                                   "STATUS:        1",
+                                   "--------------------------------------------"};
+
+                if (File.Exists(path))
+                {
+                    StreamReader reader = File.OpenText(path);
+                    string contenido = reader.ReadToEnd();
+                    reader.Close();
+
+                    for (int o = 0; o < clima.Length; o++)
+                    {
+                        contenido += "\n" + clima[o];
+                    }
+
+                    string[] climas = contenido.Split('\n');
+
+                    StreamWriter writer = new StreamWriter(path);
+                    for (int i = 0; i < climas.Length; i++)
+                    {
+                        if (i == climas.Length - 1)
+                        {
+                            writer.Write(climas[i].Trim());
+                        }
+                        else
+                        {
+                            writer.Write(climas[i].Trim() + "\n");
+                        }
+                    }
+                    writer.Close();
+
+                    input_precipitation.Text = "";
+                    input_evaporation.Text = "";
+                    input_maximum_temperature.Text = "";
+                    input_minimum_temperature.Text = "";
+                    DataRegister_Load(sender, e);
+                }
+                else
+                {
+                    StreamWriter writer = new StreamWriter(path);
+                    for (int i = 0; i < clima.Length; i++)
+                    {
+                        if (i == clima.Length - 1)
+                        {
+                            writer.Write(clima[i]);
+                        }
+                        else
+                        {
+                            writer.Write(clima[i] + "\n");
+                        }
+                    }
+                    writer.Close();
+                }
+            }
+            else
+            {
+                alert = new Alert("Todos los campos deben de estar llenos.", "Campos vacíos");
+            }
         }
 
         private void btn_save_MouseEnter(object sender, EventArgs e)

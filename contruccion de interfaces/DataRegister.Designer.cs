@@ -45,10 +45,10 @@
             this.input_evaporation = new System.Windows.Forms.TextBox();
             this.input_maximum_temperature = new System.Windows.Forms.TextBox();
             this.input_minimum_temperature = new System.Windows.Forms.TextBox();
-            this.date_picker = new System.Windows.Forms.DateTimePicker();
             this.pic_logo = new System.Windows.Forms.PictureBox();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_back = new System.Windows.Forms.Button();
+            this.input_date = new System.Windows.Forms.TextBox();
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_logo)).BeginInit();
             this.SuspendLayout();
@@ -249,23 +249,6 @@
             this.input_minimum_temperature.TabIndex = 13;
             this.input_minimum_temperature.TextChanged += new System.EventHandler(this.input_minimum_temperature_TextChange);
             // 
-            // date_picker
-            // 
-            this.date_picker.CalendarFont = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.date_picker.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.date_picker.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.date_picker.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
-            this.date_picker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.date_picker.CustomFormat = "dd/mm/yyyy";
-            this.date_picker.Enabled = false;
-            this.date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_picker.Location = new System.Drawing.Point(374, 177);
-            this.date_picker.Name = "date_picker";
-            this.date_picker.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.date_picker.Size = new System.Drawing.Size(225, 27);
-            this.date_picker.TabIndex = 14;
-            this.date_picker.Value = new System.DateTime(2020, 11, 25, 0, 0, 0, 0);
-            // 
             // pic_logo
             // 
             this.pic_logo.Image = ((System.Drawing.Image)(resources.GetObject("pic_logo.Image")));
@@ -317,6 +300,19 @@
             this.btn_back.MouseEnter += new System.EventHandler(this.btn_back_MouseEnter);
             this.btn_back.MouseLeave += new System.EventHandler(this.btn_back_MouseLeave);
             // 
+            // input_date
+            // 
+            this.input_date.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.input_date.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.input_date.Enabled = false;
+            this.input_date.Font = new System.Drawing.Font("Poppins", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.input_date.ForeColor = System.Drawing.Color.White;
+            this.input_date.Location = new System.Drawing.Point(374, 177);
+            this.input_date.Name = "input_date";
+            this.input_date.Size = new System.Drawing.Size(225, 27);
+            this.input_date.TabIndex = 10;
+            this.input_date.TextChanged += new System.EventHandler(this.input_precipitation_TextChange);
+            // 
             // DataRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -326,10 +322,10 @@
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.pic_logo);
-            this.Controls.Add(this.date_picker);
             this.Controls.Add(this.input_minimum_temperature);
             this.Controls.Add(this.input_maximum_temperature);
             this.Controls.Add(this.input_evaporation);
+            this.Controls.Add(this.input_date);
             this.Controls.Add(this.input_precipitation);
             this.Controls.Add(this.input_id);
             this.Controls.Add(this.lbl_minimum_temperature);
@@ -372,9 +368,9 @@
         private System.Windows.Forms.TextBox input_evaporation;
         private System.Windows.Forms.TextBox input_maximum_temperature;
         private System.Windows.Forms.TextBox input_minimum_temperature;
-        private System.Windows.Forms.DateTimePicker date_picker;
         private System.Windows.Forms.PictureBox pic_logo;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button btn_back;
+        private System.Windows.Forms.TextBox input_date;
     }
 }

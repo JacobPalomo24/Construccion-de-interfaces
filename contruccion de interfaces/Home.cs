@@ -16,7 +16,7 @@ namespace contruccion_de_interfaces
             lbl_greeting.Location = new Point(x, 191);
         }
 
-        private void Home_Load(object sender, System.EventArgs e)
+        private void Home_Load(object sender, EventArgs e)
         {
             Width = 800;
             Height = 450;
@@ -59,67 +59,67 @@ namespace contruccion_de_interfaces
             }
         }
 
-        private void menuBar_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void menuBar_MouseDown(object sender, MouseEventArgs e)
         {
             Home_MouseDown(e);
         }
 
-        private void menuBar_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void menuBar_MouseMove(object sender, MouseEventArgs e)
         {
             Home_MouseMove();
         }
 
-        private void menuBar_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void menuBar_MouseUp(object sender, MouseEventArgs e)
         {
             Home_MouseUp();
         }
 
-        private void lbl_window_title_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lbl_window_title_MouseDown(object sender, MouseEventArgs e)
         {
             Home_MouseDown(e);
         }
 
-        private void lbl_window_title_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lbl_window_title_MouseMove(object sender, MouseEventArgs e)
         {
             Home_MouseMove();
         }
 
-        private void lbl_window_title_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lbl_window_title_MouseUp(object sender, MouseEventArgs e)
         {
             Home_MouseUp();
         }
 
-        private void btn_close_Click(object sender, System.EventArgs e)
+        private void btn_close_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
 
-        private void btn_minimize_Click(object sender, System.EventArgs e)
+        private void btn_minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btn_settings_MouseEnter(object sender, System.EventArgs e)
+        private void btn_settings_MouseEnter(object sender, EventArgs e)
         {
             btn_settings.Image = Properties.Resources.settings_hover;
         }
 
-        private void btn_settings_MouseLeave(object sender, System.EventArgs e)
+        private void btn_settings_MouseLeave(object sender, EventArgs e)
         {
             btn_settings.Image = Properties.Resources.settings;
         }
 
-        private void btn_alta_datos_MouseEnter(object sender, System.EventArgs e)
+        private void btn_alta_datos_MouseEnter(object sender, EventArgs e)
         {
             btn_alta_datos.ForeColor = Color.FromArgb(17, 17, 17);
         }
 
-        private void btn_alta_datos_MouseLeave(object sender, System.EventArgs e)
+        private void btn_alta_datos_MouseLeave(object sender, EventArgs e)
         {
             btn_alta_datos.ForeColor = Color.FromArgb(255, 193, 7);
         }
 
-        private void btn_cambios_bajas_MouseEnter(object sender, System.EventArgs e)
+        private void btn_cambios_bajas_MouseEnter(object sender, EventArgs e)
         {
             btn_cambios_bajas.ForeColor = Color.FromArgb(17, 17, 17);
         }
@@ -153,7 +153,7 @@ namespace contruccion_de_interfaces
             this.Show();
         }
 
-        private void btn_cambios_bajas_MouseLeave(object sender, System.EventArgs e)
+        private void btn_cambios_bajas_MouseLeave(object sender, EventArgs e)
         {
             btn_cambios_bajas.ForeColor = Color.FromArgb(255, 193, 7);
         }
