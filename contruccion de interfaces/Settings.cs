@@ -7,14 +7,19 @@ namespace contruccion_de_interfaces
     public partial class Settings : Form
     {
         private Dropshadow shadow;
+
+        // Función que inicializa el formulario por defecto
         public Settings(Point FormLocation)
         {
+            // Centra el formulario
             this.Location = PointToScreen(FormLocation);
             InitializeComponent();
         }
 
+        // Cuando carga por completo el formulario
         private void Settings_Load(object sender, EventArgs e)
         {
+            // Configuración del tamoaño y de la sombra del formulario
             Width = 400;
             Height = 225;
             if (!DesignMode)
@@ -31,6 +36,10 @@ namespace contruccion_de_interfaces
             }
         }
 
+        /* --------------------- Configuración del arrastre del formulario ---------------- */
+        /*
+         * Nota: Todo este código ya fué exlicado en el código de los formularios EditDelete y SignUp
+         */
         int ex, ey;
 
         bool arrastre;
@@ -85,12 +94,16 @@ namespace contruccion_de_interfaces
         {
             Home_MouseUp();
         }
+        /* --------------------- Fin de la configuración del arrastre del formulario ---------------- */
 
+        // Se ejecuta al presionar el boton de cerrar
         private void btn_close_Click(object sender, EventArgs e)
         {
+            // Cierra el formulario actual
             this.Close();
         }
 
+        /* ---------------------- Efectos hover de los botones ---------------------- */
         private void btn_credits_MouseEnter(object sender, EventArgs e)
         {
             btn_credits.ForeColor = Color.FromArgb(17, 17, 17);
@@ -106,23 +119,27 @@ namespace contruccion_de_interfaces
             btn_logout.ForeColor = Color.FromArgb(17, 17, 17);
         }
 
+        private void btn_logout_MouseLeave(object sender, EventArgs e)
+        {
+            btn_logout.ForeColor = Color.FromArgb(255, 193, 7);
+        }
+        /* ---------------------- Fin de los efectos hover de los botones ---------------------- */
+
+        // Se ejecuta al presionar el boton de créditos
         private void btn_credits_Click(object sender, EventArgs e)
         {
-
+            // Muestra los creditos de la aplicación
             Credits credits_form = new Credits();
             credits_form.Location = PointToScreen(this.Location);
             credits_form.ShowDialog();
         }
 
+        // Se ejecuta al presionar el boton cerrar cerrar sesión
         private void btn_logout_Click(object sender, EventArgs e)
         {
+            // Cierra el formulario actual
             this.Close();
             Home.ActiveForm.Dispose();
-        }
-
-        private void btn_logout_MouseLeave(object sender, EventArgs e)
-        {
-            btn_logout.ForeColor = Color.FromArgb(255, 193, 7);
         }
     }
 }

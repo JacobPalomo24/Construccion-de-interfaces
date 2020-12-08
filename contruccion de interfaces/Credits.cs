@@ -7,13 +7,17 @@ namespace contruccion_de_interfaces
     public partial class Credits : Form
     {
         private Dropshadow shadow;
+
+        // Función que inicializa el formulario por defecto
         public Credits()
         {
             InitializeComponent();
         }
 
+        // Cuando carga por completo el formulario
         private void Credits_Load(object sender, System.EventArgs e)
         {
+            // Configuración del tamoaño y de la sombra del formulario
             Width = 800;
             Height = 450;
             if (!DesignMode)
@@ -30,6 +34,10 @@ namespace contruccion_de_interfaces
             }
         }
 
+        /* --------------------- Configuración del arrastre del formulario ---------------- */
+        /*
+         * Nota: Todo este código ya fué exlicado en el código de los formularios EditDelete y SignUp
+         */
         int ex, ey;
 
         bool arrastre;
@@ -94,19 +102,26 @@ namespace contruccion_de_interfaces
         {
             btn_okay.ForeColor = Color.FromArgb(255, 193, 7);
         }
+        /* --------------------- Fin de la configuración del arrastre del formulario ---------------- */
 
+        // Se ejecuta al presionar el boton de cerrar
         private void btn_close_Click(object sender, EventArgs e)
         {
+            // Cierra el formulario actual
             this.Close();
         }
 
+        // Se ejecuta al presionar el boton de minizar
         private void btn_minimize_Click(object sender, EventArgs e)
         {
+            // Minimiza el formulario actual
             this.WindowState = FormWindowState.Minimized;
         }
 
+        // Se ejecuta al presionar el botón aceptar
         private void btn_okay_Click(object sender, EventArgs e)
         {
+            // Cierra el formulario actual
             this.Close();
         }
     }
